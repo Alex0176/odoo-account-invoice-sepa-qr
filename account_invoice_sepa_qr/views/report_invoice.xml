@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Biricon IT Services GmbH
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <!-- The expressions pick the LAST match: a module that prints invoices with its own layout keeps the original
+         (disabled) blocks in the tree and adds its copy behind them, so the last one is the one that is printed.
+         Without such a module there is exactly one match. The block "id=qrcode" is the SEPA code; the payment
+         link code of Odoo has its own id and keeps its look. -->
+    <template id="report_invoice_document_sepa_qr" inherit_id="account.report_invoice_document">
+        <!-- Never print a QR code that pays somebody else: only the (active) bank account of the own company. -->
+        <xpath expr="(//t[@t-set='show_qr'])[last()]" position="attributes">
+            <attribute name="t-value">o.display_qr_code and o.amount_residual and o.partner_bank_id.active and o.partner_bank_id.partner_id == o.company_id.partner_id</attribute>
+        </xpath>
+        <!-- The Odoo logo in the middle of the code covers modules that a banking app needs. -->
+        <xpath expr="(//div[@id='qrcode'])[last()]//img[@id='qrcode_odoo_logo']" position="replace"/>
+        <!-- The code comes without quiet zone, so a neighbouring text or line can disturb the scan. -->
+        <xpath expr="(//div[@id='qrcode'])[last()]//div[@id='qrcode_image']//img" position="attributes">
+            <attribute name="class">o_sepa_qr</attribute>
+            <attribute name="style">padding: 3mm; background: #fff;</attribute>
+        </xpath>
+        <xpath expr="(//div[@id='qrcode'])[last()]//div[@id='qrcode_info']/p" position="replace">
+            <p>Scan this QR code with<br/>your banking app to pay</p>
+        </xpath>
+    </template>
+</odoo>

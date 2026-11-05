@@ -1,0 +1,22 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_invoice_sepa_qr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-05 10:31+0000\n"
+"PO-Revision-Date: 2026-11-05 10:31+0000\n"
+"Last-Translator: \n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_invoice_sepa_qr
+#: model_terms:ir.ui.view,arch_db:account_invoice_sepa_qr.report_invoice_document_sepa_qr
+msgid "Scan this QR code with<br/>your banking app to pay"
+msgstr "Scannen Sie diesen QR-Code mit<br/>Ihrer Banking-App zum Bezahlen"
